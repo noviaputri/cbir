@@ -1,2 +1,2 @@
-# cbir
+# Image Retrieval Project
  cbir
