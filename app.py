@@ -51,8 +51,8 @@ def search():
             image = tf.expand_dims(image, axis = 0)
             with open(feature_path) as f:
                 training_indexed = json.load(f)
-            #auto_encoder = ConvAutoEncoder.build(IMAGE_SIZE[0], IMAGE_SIZE[1], 3)
-            auto_encoder = load_model(model_path)
+            auto_encoder = ConvAutoEncoder.build(IMAGE_SIZE[0], IMAGE_SIZE[1], 3)
+            #auto_encoder = load_model(model_path)
             encoder = Model(inputs=auto_encoder.input, outputs=auto_encoder.get_layer("encoded").output)
             features_retrieved = encoder.predict(image)[0]
             
