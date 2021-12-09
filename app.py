@@ -24,7 +24,7 @@ def search():
 
         RESULTS_ARRAY = []
         feature_path = "static/training_3_subclass_feature.json"
-        model_path = "training_model.h5"
+        model_path = "static/training_model.h5"
         IMAGE_SIZE = (128, 128)
         image_url = request.form.get('img')
 
