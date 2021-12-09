@@ -6,6 +6,7 @@ import cv2
 import urllib
 import json
 from tensorflow.keras.models import Model
+from tensorflow.keras.models import load_model
 from static.cbir import ConvAutoEncoder
 
 # create flask instance
@@ -23,6 +24,7 @@ def search():
 
         RESULTS_ARRAY = []
         feature_path = "static/training_3_subclass_feature.json"
+        model_path = "training_model.h5"
         IMAGE_SIZE = (128, 128)
         image_url = request.form.get('img')
 
@@ -49,7 +51,8 @@ def search():
             image = tf.expand_dims(image, axis = 0)
             with open(feature_path) as f:
                 training_indexed = json.load(f)
-            auto_encoder = ConvAutoEncoder.build(IMAGE_SIZE[0], IMAGE_SIZE[1], 3)
+            #auto_encoder = ConvAutoEncoder.build(IMAGE_SIZE[0], IMAGE_SIZE[1], 3)
+            auto_encoder = load_model(model_path)
             encoder = Model(inputs=auto_encoder.input, outputs=auto_encoder.get_layer("encoded").output)
             features_retrieved = encoder.predict(image)[0]
             
